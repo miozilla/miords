@@ -1,6 +1,12 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Description: MariaDB 11.4.5 Multi-AZ RDS with Read Replica
 
+# aws cloudformation deploy \
+#   --template-file miords-cloudformation-template.yaml \
+#   --stack-name mariadb-multi-az-stack \
+#   --capabilities CAPABILITY_NAMED_IAM \
+#   --parameter-overrides MasterUserPassword=YourSecurePassword
+
 Parameters:
   MasterUsername:
     Type: String
