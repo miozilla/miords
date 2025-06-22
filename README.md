@@ -2,7 +2,7 @@
 miords
 
 ## Objective
-To create and configure RDS db instance, backup, Multi-AZ deployment and read replica.
+To create and configure RDS (Relational Database Service) db instance, backup, Multi-AZ deployment and read replica.
 
 
 ## Amazon Aurora & RDS
