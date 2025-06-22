@@ -22,3 +22,6 @@ To create and configure RDS db instance, backup, Multi-AZ deployment and read re
 
 ![miords007.png](./media/miords007.png)
 
+![miords008.png](./media/miords008.png)
+
+
