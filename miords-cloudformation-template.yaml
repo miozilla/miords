@@ -1,0 +1,46 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: MariaDB 11.4.5 Multi-AZ RDS with Read Replica
+
+Parameters:
+  MasterUsername:
+    Type: String
+    Default: admin
+  MasterUserPassword:
+    Type: String
+    NoEcho: true
+  DBInstanceClass:
+    Type: String
+    Default: db.t3.medium
+  AllocatedStorage:
+    Type: Number
+    Default: 20
+
+Resources:
+  PrimaryDB:
+    Type: AWS::RDS::DBInstance
+    Properties:
+      DBInstanceIdentifier: my-database
+      DBInstanceClass: !Ref DBInstanceClass
+      Engine: mariadb
+      EngineVersion: 11.4.5
+      MasterUsername: !Ref MasterUsername
+      MasterUserPassword: !Ref MasterUserPassword
+      AllocatedStorage: !Ref AllocatedStorage
+      DBName: mydb
+      MultiAZ: true
+      PubliclyAccessible: true
+
+  ReadReplicaDB:
+    Type: AWS::RDS::DBInstance
+    Properties:
+      DBInstanceIdentifier: miords-read-replica-db
+      SourceDBInstanceIdentifier: !Ref PrimaryDB
+      DBInstanceClass: !Ref DBInstanceClass
+      Engine: mariadb
+      PubliclyAccessible: true
+
+Outputs:
+  PrimaryEndpoint:
+    Value: !GetAtt PrimaryDB.Endpoint.Address
+  ReadReplicaEndpoint:
+    Value: !GetAtt ReadReplicaDB.Endpoint.Address
